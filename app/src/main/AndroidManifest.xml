@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NaiveSearch">
         <activity
-            android:name=".ui.WebViewActivity"
+            android:name=".ui.WebActivity"
             android:launchMode="singleTask"
             android:exported="false" />
 
