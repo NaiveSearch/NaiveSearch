@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.happyhorse.naivesearch">
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NaiveSearch">
         <activity
-            android:name=".ui.WebActivity"
+            android:name=".ui.WebViewActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
+
         <activity
             android:name=".ui.ResultActivity"
             android:exported="false" />
@@ -22,8 +24,7 @@
             android:name=".ui.HomeActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
