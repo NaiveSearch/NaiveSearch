@@ -12,7 +12,7 @@ import org.happyhorse.naivesearch.R;
 public class HomeActivity extends AppCompatActivity {
 
     protected void jumpToWebpage() {
-        Intent jump = new Intent(this, WebActivity.class);
+        Intent jump = new Intent(this, SearchActivity.class);
         startActivity(jump);
     }
 

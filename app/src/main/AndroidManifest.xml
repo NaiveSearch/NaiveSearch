@@ -10,15 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NaiveSearch">
         <activity
-            android:name=".ui.WebActivity"
+            android:name=".ui.SearchActivity"
             android:launchMode="singleTask"
             android:exported="false" />
 
         <activity
             android:name=".ui.ResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.HomeActivity"
