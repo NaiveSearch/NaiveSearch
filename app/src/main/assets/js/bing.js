@@ -9,7 +9,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
     }
 }
 
-elementIds = ["b_context", "est_switch", "b_header", "b_tween", "b_footer"] // Elements need to removed by id
+elementIds = ["b_footer", "b_tween", "b_header", "b_context", "est_switch"] // Elements need to removed by id
 try {
     elementIds.forEach(element => document.getElementById(element).remove())
 } catch (err) {
