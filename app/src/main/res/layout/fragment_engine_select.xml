@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_engines"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="onClick"
+    android:visibility="invisible"
+    tools:context=".EngineSelectFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButton_bing"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:background="@color/white"
+            android:contentDescription="Add engine icon here"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_bing_engine"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/imageButton_baidu"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_baidu_engine_foreground"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </LinearLayout>
+
+</FrameLayout>

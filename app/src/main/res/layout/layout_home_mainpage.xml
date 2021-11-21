@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_main">
+
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/nav_host_fragment_content_main"-->
+    <!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:defaultNavHost="true"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--         />-->
+
+    <ImageButton
+        android:id="@+id/logo_imageButton"
+        android:layout_width="168dp"
+        android:layout_height="168dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/mr_cast_route_divider_light"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:id="@+id/search_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/engine_selection_imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/ic_baidu_engine_foreground"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            <FrameLayout
+                android:id="@+id/fragment_container_engines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <fragment
+                    android:id="@+id/fragment_engines"
+                    android:name="org.happyhorse.naivesearch.ui.fragment.EngineSelectFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+
+            android:layout_weight="1">
+            <!-- 可以在这个容器中动态加载Fragment -->
+            <fragment
+                android:id="@+id/search_fragment"
+                android:name="org.happyhorse.naivesearch.ui.fragment.SearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="41dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/total_searched_textview"
+        android:layout_width="172dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="8dp"
+        android:text="total_searched_textview"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/total_blocked_ad_textview"
+        android:layout_width="169dp"
+        android:layout_height="29dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="8dp"
+        android:text="total_blocked_ad_textview"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

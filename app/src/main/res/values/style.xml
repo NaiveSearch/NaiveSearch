@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--&lt;!&ndash; 设置全屏&ndash;&gt;-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+        <!-- 设置无标题-->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

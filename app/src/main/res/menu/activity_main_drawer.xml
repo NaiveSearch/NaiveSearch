@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_language"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_language" />
+        <item
+            android:id="@+id/nav_reset"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_reset" />
+        <item
+            android:id="@+id/nav_theme"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_theme" />
+    </group>
+    <item android:title="@string/communicate">
+        <menu>
+            <item android:id="@+id/nav_share" android:icon="@drawable/slide"
+                android:title="@string/share" />
+            <item android:id="@+id/nav_send" android:icon="@drawable/slide"
+                android:title="@string/send" />
+        </menu>
+    </item>
+
+</menu>
