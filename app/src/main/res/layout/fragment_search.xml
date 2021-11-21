@@ -6,24 +6,31 @@
     android:layout_height="wrap_content">
 
 
-<!--    //TODO: complete automatic text input`s width to fixed-->
+    <!--    //TODO: complete automatic text input`s width to fixed-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+        <!--            android:layout_width="195dp"-->
+        <!--            android:layout_height="47dp"-->
         <EditText
             android:id="@+id/key_word_TextView"
-            android:layout_width="195dp"
-            android:layout_height="47dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:gravity="center_vertical"
+            android:hint="search"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            tools:ignore="RtlCompat" />
 
         <ImageButton
             android:id="@+id/search_imageButton"
             android:layout_width="47dp"
             android:layout_height="match_parent"
-            android:background="@color/cardview_light_background"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_baseline_search_24" />
 

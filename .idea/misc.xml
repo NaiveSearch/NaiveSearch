@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/activity_search.xml" value="0.36614583333333334" />
+        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/app_bar_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_dashboard.xml" value="0.36614583333333334" />
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_engine_select.xml" value="0.2046875" />
+        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_notifications.xml" value="0.36614583333333334" />
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_search.xml" value="0.36614583333333334" />
+        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/search_widget_template.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
