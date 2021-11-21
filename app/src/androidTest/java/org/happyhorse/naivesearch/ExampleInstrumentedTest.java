@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("org.happyhorse.naivesearch", appContext.getPackageName());
+        assertEquals("org.happyhorse.can301", appContext.getPackageName());
     }
 }

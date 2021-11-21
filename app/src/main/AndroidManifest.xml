@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.happyhorse.naivesearch">
+
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo_foreground"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NaiveSearch">
+        android:theme="@style/Theme.CAN301">
         <activity
-            android:name=".ui.SearchActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.ResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.HomeActivity"
-            android:exported="true">
+            android:name=".ui.activity.HomeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.CAN301.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+        <!--        android:label="@string/title_activity_result"-->
     </application>
 
 </manifest>

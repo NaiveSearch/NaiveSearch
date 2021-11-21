@@ -1,4 +1,4 @@
-//package org.happyhorse.naivesearch.ui;
+package org.happyhorse.naivesearch.ui;//package org.happyhorse.naivesearch.ui;
 //
 //import android.content.Intent;
 //import android.net.http.SslError;
