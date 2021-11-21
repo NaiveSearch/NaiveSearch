@@ -76,6 +76,17 @@ public class SearchActivity extends AppCompatActivity {
                         injectJS(webView, engine);
                         super.onPageFinished(view, url);
                     }
+
+                    public boolean shouldOverrideUrlLoading(WebView view, String url)
+                    {
+                        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
+                        Bundle http_link_bundle = new Bundle();
+                        http_link_bundle.putString("link",url);
+                        intent.putExtras(http_link_bundle);
+                        startActivity(intent);
+                        return true;
+                    }
+
                 });
             }
         };
@@ -182,7 +193,7 @@ public class SearchActivity extends AppCompatActivity {
         /* 第一次加载 此处需要从HomeActivity获取keyword 和 Search Engine
          * 此处暂用初始化的值代替
          */
-        setEngine(Config.BAIDU_SEARCH);
+        setEngine(Config.BING_SEARCH);
         setKeyword("笔记本电脑");
         setPage(1);
         setContent(webView, engine, keyword, page);
