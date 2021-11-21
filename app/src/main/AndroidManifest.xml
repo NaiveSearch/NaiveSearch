@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CAN301">
+
         <activity
             android:name=".ui.activity.ResultActivity"
             android:exported="false" />

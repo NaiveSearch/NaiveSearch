@@ -94,7 +94,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String res = SpyderUtil.getSearchResult(engine, keyword, page);
+                    String res = SpyderUtil.
+                            getSearchResult(engine, keyword, page);
                     Message msg = handler.obtainMessage();
                     Bundle bundle = new Bundle();
                     bundle.putString("content", res.trim());
@@ -133,12 +134,16 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //UI setting
+        Intent intent=getIntent();
+        Bundle bundle=intent.getBundleExtra("Message");
+        setKeyword(bundle.getString("keyword"));
+        setEngine(bundle.getInt("engine"));
+        setPage(bundle.getInt("page"));
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        //TODO: add pre/next page button
-        //TODO: set listener to pre/next page button
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -193,9 +198,6 @@ public class SearchActivity extends AppCompatActivity {
         /* 第一次加载 此处需要从HomeActivity获取keyword 和 Search Engine
          * 此处暂用初始化的值代替
          */
-        setEngine(Config.BING_SEARCH);
-        setKeyword("笔记本电脑");
-        setPage(1);
         setContent(webView, engine, keyword, page);
 
 

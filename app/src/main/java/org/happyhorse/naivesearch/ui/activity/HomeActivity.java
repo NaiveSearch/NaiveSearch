@@ -1,11 +1,19 @@
 package org.happyhorse.naivesearch.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,20 +27,24 @@ import com.google.android.material.navigation.NavigationView;
 import org.happyhorse.naivesearch.R;
 import org.happyhorse.naivesearch.databinding.LayoutHomeContainerBinding;
 
+import java.util.Locale;
+
 public class HomeActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private LayoutHomeContainerBinding binding;
 
-
-    private final String TOTAL_BLOCKED_AD_STRING = "Total AD blocked: ";
-    private final String TOTAL_SEARCH_TIME_STRING = "Total searches: ";
+    //engine selection
+    private int engine=0;
 
     //preferences
+    private SharedPreferences prefs;
     private int TOTAL_BLOCKED_AD = 0;
     private int TOTAL_SEARCH_TIME = 0;
+    private int LANGUAGE_SELECTION=0;
 
     //search parameters
     private String QUERY;
+
 
     //view
     private ImageButton ENGINE_SELECTION_BUTTON;
@@ -57,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setLANGUAGE_SELECTION(Locale.CHINESE);
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -75,30 +87,25 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.nav_language, R.id.nav_reset, R.id.nav_theme)
                 .setOpenableLayout(drawer)
                 .build();
+
+
+
+
+
+
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     private void loadPreferences() {
-        SharedPreferences prefs = getSharedPreferences("SummaryInfo", MODE_PRIVATE);
+        prefs= getPreferences(MODE_PRIVATE);
         TOTAL_BLOCKED_AD = prefs.getInt("blockedAD", 0);
         TOTAL_SEARCH_TIME = prefs.getInt("searchTime", 0);
-    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main_activity2, menu);
-//        return true;
-//    }
+        LANGUAGE_SELECTION=prefs.getInt("language",0);
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//       NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
+    }
+
 
     private void setDefaultText() {
         updateSummaryInfo();
@@ -107,8 +114,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void updateSummaryInfo() {
-        TOTAL_BLOCKED_AD_TEXTVIEW.setText(TOTAL_BLOCKED_AD_STRING + String.valueOf(TOTAL_BLOCKED_AD));
-        TOTAL_SEARCHED_TEXTVIEW.setText(TOTAL_SEARCH_TIME_STRING + String.valueOf(TOTAL_SEARCH_TIME));
+        TOTAL_BLOCKED_AD_TEXTVIEW.setText(getString(R.string.TOTAL_BLOCKED_AD)+" "+String.valueOf(TOTAL_BLOCKED_AD));
+        TOTAL_SEARCHED_TEXTVIEW.setText(getString(R.string.TOTAL_SEARCH_TIME_STRING)+" "+String.valueOf(TOTAL_SEARCH_TIME));
     }
 
     private void listenerAdding() {
@@ -137,7 +144,18 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: do selection engines function here
-                startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                EditText editText=(EditText) findViewById(R.id.key_word_TextView);
+                Intent intent=new Intent(new Intent(HomeActivity.this, SearchActivity.class));
+                String input=editText.getText().toString();
+                if(!input.equals("")){
+                    Bundle bundle=new Bundle();
+                    bundle.putString("keyword",input);
+                    bundle.putInt("engine",engine);
+                    bundle.putInt("page",1);
+                    intent.putExtra("Message",bundle);
+                }
+
+                startActivity(intent);
             }
         });
 
@@ -145,13 +163,16 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_baidu_engine_foreground);
+                engine=0;
                 //TODO: do engine parameter here
+
             }
         });
         ENGINE_BING_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_bing_engine_foreground);
+                engine=1;
                 //TODO: do engine parameter here
             }
         });
@@ -186,4 +207,20 @@ public class HomeActivity extends AppCompatActivity {
         ENGINE_BING_BUTTON.setLayoutParams(new LinearLayout.LayoutParams(height, height));
     }
 
+    @SuppressWarnings("deprecation")
+    private void setLANGUAGE_SELECTION(Locale locale){
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            configuration.setLocale(locale);
+        }else{
+            configuration.locale=locale;
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N){
+            getApplicationContext().createConfigurationContext(configuration);
+        }else {
+            resources.updateConfiguration(configuration,displayMetrics);
+        }
+    }
 }

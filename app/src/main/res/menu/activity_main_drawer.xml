@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_language"
@@ -17,6 +16,7 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_theme" />
     </group>
+
     <item android:title="@string/communicate">
         <menu>
             <item android:id="@+id/nav_share" android:icon="@drawable/slide"

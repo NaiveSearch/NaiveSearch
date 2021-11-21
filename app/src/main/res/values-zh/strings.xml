@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">聚合搜索</string>
+    <string name="title_activity_result">结果</string>
+    <string name="title_home">应用主页</string>
+    <string name="title_dashboard">导航页面</string>
+    <string name="title_notifications">消息通知</string>
+    <string name="previous_page">上一页</string>
+    <string name="next_page">下一页</string>
+    <string name="home">应用主页</string>
+    <string name="title_activity_main2">聚合搜索</string>
+    <string name="navigation_drawer_open">打开导航边栏</string>
+    <string name="navigation_drawer_close">关闭导航边栏</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">导航首部</string>
+    <string name="action_settings">设置</string>
+
+    <string name="menu_language">切换语言</string>
+    <string name="menu_theme">切换主题</string>
+    <string name="menu_reset">重置应用</string>
+    <string name="title_activity_main3">MainActivity3</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="communicate">交流</string>
+    <string name="share">分享给</string>
+    <string name="send">发送到</string>
+    <string name="TOTAL_BLOCKED_AD">总共拦截的广告数 :</string>
+    <string name="TOTAL_SEARCH_TIME_STRING">已搜索次数 :</string>
+</resources>
