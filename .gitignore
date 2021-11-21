@@ -4,7 +4,7 @@
 
 ### AndroidStudio ###
 # Covers files to be ignored for android development using Android Studio.
-
+local.properties
 # Built application files
 *.apk
 *.ap_
