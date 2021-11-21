@@ -1,4 +1,4 @@
-package org.happyhorse.naivesearch.ui.theme;
+package org.happyhorse.naivesear4ch.ui.theme;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

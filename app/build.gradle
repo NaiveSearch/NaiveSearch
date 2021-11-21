@@ -28,6 +28,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 }
 
 dependencies {
@@ -45,6 +48,9 @@ dependencies {
     implementation 'androidx.core:core:1.7.0'
 
     implementation files('libs/jsoup-1.14.3.jar')
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:23.2.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

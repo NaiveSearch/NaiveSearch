@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:background="@color/cardview_light_background"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_search_foreground" />
+            app:srcCompat="@drawable/ic_baseline_search_24" />
 
     </LinearLayout>
 
