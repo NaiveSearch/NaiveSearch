@@ -1,0 +1,9 @@
+body{
+    min-width: 400px;
+    overflow: auto;
+}
+.sam_newgrid{
+    width: 400px !important;
+    margin-left: 0 !important;
+    padding-left: 5 !important;
+}

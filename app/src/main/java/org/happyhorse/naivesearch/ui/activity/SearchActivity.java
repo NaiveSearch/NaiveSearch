@@ -72,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     @Override
                     public void onPageFinished(WebView view, String url) {
-                        //injectCSS();
+                        injectCSS(webView, engine);
                         injectJS(webView, engine);
                         super.onPageFinished(view, url);
                     }
@@ -124,6 +124,26 @@ public class SearchActivity extends AppCompatActivity {
                     "script.type = 'text/javascript';" +
                     "script.innerHTML = window.atob('" + encoded + "');" +
                     "parent.appendChild(script)" +
+                    "})()");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void injectCSS(WebView webView, int engine) {
+        try {
+            String[] css = {"css/baidu.css", "css/bing.css"};
+            InputStream inputStream = getAssets().open(css[engine]);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
+            webView.loadUrl("javascript:(function() {" +
+                    "var parent = document.getElementsByTagName('head').item(0);" +
+                    "var style = document.createElement('style');" +
+                    "style.type = 'text/css';" +
+                    "style.innerHTML = window.atob('" + encoded + "');" +
+                    "parent.appendChild(style)" +
                     "})()");
         } catch (Exception e) {
             e.printStackTrace();
