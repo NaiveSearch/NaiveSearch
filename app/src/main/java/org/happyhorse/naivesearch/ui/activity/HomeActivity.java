@@ -77,10 +77,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLANGUAGE_SELECTION(Locale.CHINESE);
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         initialization();
         listenerAdding();
         loadPreferences();
@@ -117,12 +115,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if(id == R.id.nav_language) {
             finish();
-            // Handle the camera action
-        }else if(id == R.id.nav_theme) {
+            SharedPreferences.Editor editor=prefs.edit();
+            Intent intent=new Intent(HomeActivity.this,HomeActivity.class);
+            switch (LANGUAGE_SELECTION) {
+                case 0:
+                    editor.putInt("language",1);
+                    editor.commit();
+                    setLANGUAGE_SELECTION(Locale.CHINESE);
+                    System.out.println("Changing to CHINESE");
+                    startActivity(intent);
+                    break;
+                case 1:
+                    editor.putInt("language",0);
+                    editor.commit();
+                    setLANGUAGE_SELECTION(Locale.ENGLISH);
+                    System.out.println("changing to English");
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+//             Handle the camera action
+        }else if(id == R.id.nav_theme){
 
-        } else if (id == R.id.nav_reset) {
+        } else if (id == R.id.nav_reset){
 
-        }  else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_share){
 
         } else if (id == R.id.nav_send) {
 
@@ -146,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TOTAL_BLOCKED_AD = prefs.getInt("blockedAD", 0);
         TOTAL_SEARCH_TIME = prefs.getInt("searchTime", 0);
         LANGUAGE_SELECTION = prefs.getInt("language", 0);
-
+        System.out.println(LANGUAGE_SELECTION);
     }
 
 
@@ -254,20 +272,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("deprecation")
     private void setLANGUAGE_SELECTION(Locale locale) {
+        System.out.println("resetting"+locale);
         Resources resources = getResources();
         Configuration configuration = resources.getConfiguration();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            configuration.setLocale(locale);
-        } else {
-            configuration.locale = locale;
-        }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-            getApplicationContext().createConfigurationContext(configuration);
-        } else {
-            resources.updateConfiguration(configuration, displayMetrics);
-        }
-
+        configuration.setLocale(locale);
+        getApplicationContext().createConfigurationContext(configuration);
+        resources.updateConfiguration(configuration,displayMetrics);
     }
 
 }

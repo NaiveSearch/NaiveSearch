@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.happyhorse.naivesearch">
 
     <application
@@ -8,7 +9,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CAN301">
+        android:theme="@style/Theme.CAN301"
+        android:configChanges="locale">
 
         <activity
             android:name=".ui.activity.ResultActivity"
@@ -31,5 +33,6 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"
+        tools:ignore="ProtectedPermissions" />
 </manifest>
