@@ -11,14 +11,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -29,19 +36,19 @@ import org.happyhorse.naivesearch.databinding.LayoutHomeContainerBinding;
 
 import java.util.Locale;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private AppBarConfiguration mAppBarConfiguration;
     private LayoutHomeContainerBinding binding;
 
     //engine selection
-    private int engine=0;
+    private int engine = 0;
 
     //preferences
     private SharedPreferences prefs;
     private int TOTAL_BLOCKED_AD = 0;
     private int TOTAL_SEARCH_TIME = 0;
-    private int LANGUAGE_SELECTION=0;
-
+    private int LANGUAGE_SELECTION = 0;
+    TextView text;
     //search parameters
     private String QUERY;
 
@@ -66,44 +73,98 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView ENGINE_SELECTION_FRAGMENT;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLANGUAGE_SELECTION(Locale.CHINESE);
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         initialization();
         listenerAdding();
         loadPreferences();
         setDefaultText();
 
-        setSupportActionBar(binding.appBarMain.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_language, R.id.nav_reset, R.id.nav_theme)
-                .setOpenableLayout(drawer)
-                .build();
-
-
-
 
 
 
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
+        //获取抽屉布局并设置监听
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //ActionBarDrawerToggle  是 DrawerLayout.DrawerListener实现，和 NavigationDrawer搭配使用，推荐用这个方法，符合Android design规范。
+        ActionBarDrawerToggle toggle =new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        //获取导航视图并设置菜单监听，对应上面实现的接口
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+    }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {//当导时航栏菜单被单击时，根据ID判断并给出响应
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if(id == R.id.nav_language) {
+            finish();
+            SharedPreferences.Editor editor=prefs.edit();
+            Intent intent=new Intent(HomeActivity.this,HomeActivity.class);
+            switch (LANGUAGE_SELECTION) {
+                case 0:
+                    editor.putInt("language",1);
+                    editor.commit();
+                    setLANGUAGE_SELECTION(Locale.CHINESE);
+                    System.out.println("Changing to CHINESE");
+                    startActivity(intent);
+                    break;
+                case 1:
+                    editor.putInt("language",0);
+                    editor.commit();
+                    setLANGUAGE_SELECTION(Locale.ENGLISH);
+                    System.out.println("changing to English");
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+//             Handle the camera action
+        }else if(id == R.id.nav_theme){
+
+        } else if (id == R.id.nav_reset){
+
+        }  else if (id == R.id.nav_share){
+
+        } else if (id == R.id.nav_send) {
+
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
+
+
+
+
+
+
+
+
+
     private void loadPreferences() {
-        prefs= getPreferences(MODE_PRIVATE);
+        prefs = getPreferences(MODE_PRIVATE);
         TOTAL_BLOCKED_AD = prefs.getInt("blockedAD", 0);
         TOTAL_SEARCH_TIME = prefs.getInt("searchTime", 0);
-        LANGUAGE_SELECTION=prefs.getInt("language",0);
-
+        LANGUAGE_SELECTION = prefs.getInt("language", 0);
+        System.out.println(LANGUAGE_SELECTION);
     }
 
 
@@ -114,8 +175,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void updateSummaryInfo() {
-        TOTAL_BLOCKED_AD_TEXTVIEW.setText(getString(R.string.TOTAL_BLOCKED_AD)+" "+String.valueOf(TOTAL_BLOCKED_AD));
-        TOTAL_SEARCHED_TEXTVIEW.setText(getString(R.string.TOTAL_SEARCH_TIME_STRING)+" "+String.valueOf(TOTAL_SEARCH_TIME));
+        TOTAL_BLOCKED_AD_TEXTVIEW.setText(getString(R.string.TOTAL_BLOCKED_AD) + " " + String.valueOf(TOTAL_BLOCKED_AD));
+        TOTAL_SEARCHED_TEXTVIEW.setText(getString(R.string.TOTAL_SEARCH_TIME_STRING) + " " + String.valueOf(TOTAL_SEARCH_TIME));
     }
 
     private void listenerAdding() {
@@ -144,15 +205,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: do selection engines function here
-                EditText editText=(EditText) findViewById(R.id.key_word_TextView);
-                Intent intent=new Intent(new Intent(HomeActivity.this, SearchActivity.class));
-                String input=editText.getText().toString();
-                if(!input.equals("")){
-                    Bundle bundle=new Bundle();
-                    bundle.putString("keyword",input);
-                    bundle.putInt("engine",engine);
-                    bundle.putInt("page",1);
-                    intent.putExtra("Message",bundle);
+                EditText editText = (EditText) findViewById(R.id.key_word_TextView);
+                Intent intent = new Intent(new Intent(HomeActivity.this, SearchActivity.class));
+                String input = editText.getText().toString();
+                if (!input.equals("")) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("keyword", input);
+                    bundle.putInt("engine", engine);
+                    bundle.putInt("page", 1);
+                    intent.putExtra("Message", bundle);
                 }
 
                 startActivity(intent);
@@ -163,7 +224,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_baidu_engine_foreground);
-                engine=0;
+                engine = 0;
                 //TODO: do engine parameter here
 
             }
@@ -172,10 +233,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_bing_engine_foreground);
-                engine=1;
+                engine = 1;
                 //TODO: do engine parameter here
             }
         });
+
+
     }
 
 
@@ -208,19 +271,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private void setLANGUAGE_SELECTION(Locale locale){
+    private void setLANGUAGE_SELECTION(Locale locale) {
+        System.out.println("resetting"+locale);
         Resources resources = getResources();
         Configuration configuration = resources.getConfiguration();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
-            configuration.setLocale(locale);
-        }else{
-            configuration.locale=locale;
-        }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N){
-            getApplicationContext().createConfigurationContext(configuration);
-        }else {
-            resources.updateConfiguration(configuration,displayMetrics);
-        }
+        configuration.setLocale(locale);
+        getApplicationContext().createConfigurationContext(configuration);
+        resources.updateConfiguration(configuration,displayMetrics);
     }
+
 }
