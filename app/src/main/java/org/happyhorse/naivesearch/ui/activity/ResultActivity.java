@@ -23,9 +23,17 @@ public class ResultActivity extends AppCompatActivity {
         Bundle http_link_bundle = intent.getExtras();
         String url = http_link_bundle.getString("link");
 
-        webView = new WebView(this);
+        //webView = new WebView(this);
+        webView = (WebView) findViewById(R.id.result_webview);
         webView.getSettings().setJavaScriptEnabled(true);
+
         webView.loadUrl(url);
-        setContentView(webView);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 }

@@ -14,7 +14,8 @@
 
         <activity
             android:name=".ui.activity.ResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CAN301.NoActionBar"/>
         <activity
             android:name=".ui.activity.HomeActivity"
             android:exported="true"

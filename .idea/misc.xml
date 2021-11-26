@@ -4,15 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/activity_search.xml" value="0.36614583333333334" />
-        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/app_bar_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_dashboard.xml" value="0.36614583333333334" />
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_engine_select.xml" value="0.2046875" />
-        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_notifications.xml" value="0.36614583333333334" />
         <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/fragment_search.xml" value="0.36614583333333334" />
-        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/ANDORIDAPP/github/backup/NaiveSearch/app/src/main/res/layout/search_widget_template.xml" value="0.36614583333333334" />
-        <entry key="..\:/Navisearch/app/src/main/res/layout/app_bar_main.xml" value="0.15081521739130435" />
-        <entry key="..\:/Navisearch/app/src/main/res/layout/layout_home_container.xml" value="0.15081521739130435" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.16510416666666666" />
+        <entry key="app/src/main/res/drawable/ic_component_style_rounded_border.xml" value="0.2984375" />
+        <entry key="app/src/main/res/layout/activity_result.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.14895833333333333" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.14895833333333333" />
+        <entry key="app/src/main/res/layout/component_style_rounded_border.xml" value="0.23278985507246377" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.14895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23278985507246377" />
+        <entry key="app/src/main/res/layout/layout_home_container.xml" value="0.23278985507246377" />
+        <entry key="app/src/main/res/layout/layout_home_mainpage.xml" value="0.125" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_search.xml" value="0.16510416666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_search_round.xml" value="0.16510416666666666" />
       </map>
     </option>
   </component>

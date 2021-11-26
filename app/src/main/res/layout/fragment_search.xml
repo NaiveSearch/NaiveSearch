@@ -10,15 +10,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        android:background="@drawable/ic_component_style_rounded_border">
+
 
         <!--            android:layout_width="195dp"-->
         <!--            android:layout_height="47dp"-->
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="29dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_component_style_rounded_border" />
+
         <EditText
             android:id="@+id/key_word_TextView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:background="@null"
             android:ems="10"
             android:gravity="center_vertical"
             android:hint="search"
@@ -29,7 +40,7 @@
 
         <ImageButton
             android:id="@+id/search_imageButton"
-            android:layout_width="47dp"
+            android:layout_width="49dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_baseline_search_24" />

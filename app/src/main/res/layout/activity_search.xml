@@ -22,7 +22,8 @@
             android:id="@+id/search_fragment"
             android:name="org.happyhorse.naivesearch.ui.fragment.SearchFragment"
             android:layout_width="match_parent"
-            android:layout_height="41dp" />
+            android:layout_height="41dp"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
