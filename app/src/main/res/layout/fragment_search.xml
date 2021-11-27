@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/ic_component_style_rounded_border">
 
 

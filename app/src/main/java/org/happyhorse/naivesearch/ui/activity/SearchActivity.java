@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -265,11 +266,20 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 keyword = input.getText().toString();
                 setContent(webView, engine, keyword, 1);
+                input.clearFocus();
+                hideInput();
             }
         });
 
 
     }
 
+    protected void hideInput() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        View v = getWindow().peekDecorView();
+        if (null != v) {
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
 
 }
