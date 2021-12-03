@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.SslErrorHandler;
@@ -21,10 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -69,15 +64,17 @@ public class SearchActivity extends AppCompatActivity {
                 String unencodedHtml = bundle.getString("content");
                 //String encodedHtml = Base64.encodeToString(unencodedHtml.getBytes(), Base64.NO_PADDING);
                 //webView.loadData(encodedHtml, "text/html", "base64");
+                webView.getSettings().setBlockNetworkImage(true);
                 webView.loadDataWithBaseURL(Config.SEARCH_ENGINE_URL[engine], unencodedHtml, "text/html", "UTF-8", null);
 
                 webView.setWebViewClient(new WebViewClient() {
 
                     @Override
                     public void onPageFinished(WebView view, String url) {
-                        injectCSS(webView, engine);
-                        injectJS(webView, engine);
                         super.onPageFinished(view, url);
+                        injectJS(webView, engine);
+                        injectCSS(webView, engine);
+                        webView.getSettings().setBlockNetworkImage(false);
                     }
 
                     public boolean shouldOverrideUrlLoading(WebView view, String url)
@@ -112,7 +109,6 @@ public class SearchActivity extends AppCompatActivity {
         }).start();
 
     }
-
     private void injectJS(WebView webView, int engine) {
         try {
             String[] js = {"js/baidu.js", "js/bing.js"};

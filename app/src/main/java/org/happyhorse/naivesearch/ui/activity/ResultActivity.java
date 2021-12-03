@@ -3,6 +3,7 @@ package org.happyhorse.naivesearch.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,7 +41,15 @@ public class ResultActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url){
-                view.loadUrl(url);
+                if (url.startsWith("http://") || url.startsWith("https://")) {
+                    view.loadUrl(url);
+                    return false;
+                }
+                try {
+                    webView.goBack(); // 页面尝试跳转到自家app时阻止并返回上一页
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return true;
             }
         });
