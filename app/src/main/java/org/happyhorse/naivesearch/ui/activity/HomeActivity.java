@@ -245,35 +245,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-
+        EditText editText = (EditText) findViewById(R.id.key_word_TextView);
+        Intent intent = new Intent(new Intent(HomeActivity.this, SearchActivity.class));
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    System.out.println("Search key pressed");
+                    Editable editableinput =editText.getText();
+                    String input="";
+                    if(editableinput!=null) input=editableinput.toString();
+                    if (!input.equals("")) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("keyword", input);
+                        bundle.putInt("engine", engine);
+                        bundle.putInt("page", 1);
+                        intent.putExtra("Message", bundle);
+                        startActivity(intent);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         SEARCH_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: do selection engines function here
-                EditText editText = (EditText) findViewById(R.id.key_word_TextView);
-                Intent intent = new Intent(new Intent(HomeActivity.this, SearchActivity.class));
-                editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                            System.out.println("Search key pressed");
-                            Editable editableinput =editText.getText();
-                            String input="";
-                            if(editableinput!=null) input=editableinput.toString();
-                            if (!input.equals("")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("keyword", input);
-                                bundle.putInt("engine", engine);
-                                bundle.putInt("page", 1);
-                                intent.putExtra("Message", bundle);
-                                startActivity(intent);
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-                });
+
                 Editable editableinput =editText.getText();
                 String input="";
                 if(editableinput!=null) input=editableinput.toString();

@@ -74,7 +74,7 @@
                 android:layout_marginStart="32dp"
                 android:text="@string/previous_page"
                 android:textColor="@color/textPrimary"
-                android:background="@color/buttonPrimary"
+                android:background="@drawable/ic_component_style_rounded_border"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -86,7 +86,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/home"
                 android:textColor="@color/textPrimary"
-                android:background="@color/buttonPrimary"
+                android:background="@drawable/ic_component_style_rounded_border"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_searchActivity_nextPage"
                 app:layout_constraintStart_toEndOf="@+id/button_searchActivity_previousPage" />
@@ -98,7 +98,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="@string/next_page"
                 android:textColor="@color/textPrimary"
-                android:background="@color/buttonPrimary"
+                android:background="@drawable/ic_component_style_rounded_border"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
