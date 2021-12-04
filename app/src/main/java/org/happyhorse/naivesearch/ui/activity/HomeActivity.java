@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -87,6 +88,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView TOTAL_SEARCHED_TEXTVIEW;
 
     private TextView ENGINE_SELECTION_FRAGMENT;
+    public static final String FIRST_START = "FirstStart";
+    public static final String NIGHT_MODE = "NightMode";
+    public static final String PREF = "AppSettingsPrefs";
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF,0);
+        final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
+        boolean isFirstStart = appSettingsPrefs.getBoolean(FIRST_START, true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && isFirstStart ){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        } else {
+            if (isNightModeOn) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
         initialization();
         listenerAdding();
         //loadPreferences();
@@ -154,6 +172,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 //             Handle the camera action
         }else if(id == R.id.nav_theme){
+            final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF,0);
+            SharedPreferences.Editor editor = appSettingsPrefs.edit();
+            final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
+            if (isNightModeOn) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putBoolean(FIRST_START, false);
+                editor.putBoolean(NIGHT_MODE, false);
+                editor.apply();
+                recreate();
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putBoolean(FIRST_START, false);
+                editor.putBoolean(NIGHT_MODE, true);
+                editor.apply();
+                recreate();
+            }
 
         } else if (id == R.id.nav_reset){
 
@@ -268,7 +302,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ENGINE_BING_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_bing_engine_foreground);
+                ENGINE_SELECTION_BUTTON.setImageResource(R.mipmap.ic_bing_engine);
                 engine = 1;
                 //TODO: do engine parameter here
             }

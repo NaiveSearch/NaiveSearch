@@ -1,8 +1,10 @@
 package org.happyhorse.naivesearch.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -22,10 +24,15 @@ public class ResultActivity extends AppCompatActivity {
     private WebView webView;
     private long exitTime = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+
+
 
         Intent intent = getIntent();
         Bundle http_link_bundle = intent.getExtras();

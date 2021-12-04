@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
     <!--    android:paddingTop="?attr/actionBarSize"-->
 
 
@@ -42,7 +43,7 @@
         android:id="@+id/webView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#AF2B2B"
+        android:background="@color/mainBackground"
 
         app:layout_constraintBottom_toTopOf="@+id/nav_buttons"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -63,7 +64,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/mainBackground">
 
             <Button
                 android:id="@+id/button_searchActivity_previousPage"
@@ -71,6 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="@string/previous_page"
+                android:textColor="@color/textPrimary"
+                android:background="@color/buttonPrimary"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,6 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/home"
+                android:textColor="@color/textPrimary"
+                android:background="@color/buttonPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_searchActivity_nextPage"
                 app:layout_constraintStart_toEndOf="@+id/button_searchActivity_previousPage" />
@@ -90,6 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="@string/next_page"
+                android:textColor="@color/textPrimary"
+                android:background="@color/buttonPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

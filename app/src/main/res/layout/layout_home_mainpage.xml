@@ -58,7 +58,7 @@
                 android:id="@+id/engine_selection_imageButton"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@color/white"
+                android:background="@color/back"
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/ic_baidu_engine_foreground"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -101,7 +101,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="8dp"
         android:text="total_searched_textview"
-        android:textColor="@color/black"
+        android:textColor="@color/textPrimary"
         android:textSize="16sp" />
 
     <TextView
@@ -111,7 +111,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="8dp"
         android:text="total_blocked_ad_textview"
-        android:textColor="@color/black"
+        android:textColor="@color/textPrimary"
         android:textSize="16sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

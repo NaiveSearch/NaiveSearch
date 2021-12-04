@@ -8,4 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#D6D6D6</color>
+    <color name="textPrimary">#FF000000</color>
+    <color name="buttonPrimary">#D6D6D6</color>
+    <color name="back">#FFFFFFFF</color>
+
+
+
+
+    <color name="mainBackground">@color/white</color>
+
+
+
 </resources>

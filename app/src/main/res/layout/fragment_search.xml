@@ -13,7 +13,10 @@
         android:orientation="horizontal"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:background="@drawable/ic_component_style_rounded_border">
+        android:background="@drawable/ic_component_style_rounded_border"
+
+
+        >
 
 
         <!--            android:layout_width="195dp"-->
@@ -22,6 +25,7 @@
             android:id="@+id/imageButton5"
             android:layout_width="29dp"
             android:layout_height="match_parent"
+            android:background="@drawable/ic_component_style_rounded_border"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_component_style_rounded_border" />
 
@@ -35,6 +39,7 @@
             android:ems="10"
             android:gravity="center_vertical"
             android:hint="search"
+            android:textColor="@color/textPrimary"
             android:inputType="textPersonName"
             android:singleLine="true"
             android:textAlignment="viewStart"
@@ -45,6 +50,7 @@
             android:layout_width="49dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
+            android:background="@drawable/ic_component_style_rounded_border"
             app:srcCompat="@drawable/ic_baseline_search_24" />
 
     </LinearLayout>

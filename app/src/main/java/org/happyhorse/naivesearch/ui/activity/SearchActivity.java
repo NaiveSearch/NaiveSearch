@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -165,6 +166,8 @@ public class SearchActivity extends AppCompatActivity {
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
 
@@ -289,6 +292,7 @@ public class SearchActivity extends AppCompatActivity {
                 hideInput();
             }
         });
+
     }
 
     protected void hideInput() {

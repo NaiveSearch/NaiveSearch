@@ -30,7 +30,7 @@
             android:id="@+id/imageButton_baidu"
             android:layout_width="match_parent"
             android:layout_height="97dp"
-            android:background="@color/white"
+            android:background="@color/back"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_baidu_engine_foreground"
             tools:ignore="SpeakableTextPresentCheck" />
