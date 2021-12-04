@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -52,7 +53,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //search parameters
     private String QUERY;
 
-
     //view
     private ImageButton ENGINE_SELECTION_BUTTON;
     private ImageButton SEARCH_BUTTON;
@@ -70,28 +70,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView TOTAL_BLOCKED_AD_TEXTVIEW;
     private TextView TOTAL_SEARCHED_TEXTVIEW;
 
-
     private TextView ENGINE_SELECTION_FRAGMENT;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadPreferences();
+        if (LANGUAGE_SELECTION==0){
+            setLANGUAGE_SELECTION(Locale.ENGLISH);
+        }else if(LANGUAGE_SELECTION==1){
+            setLANGUAGE_SELECTION(Locale.CHINESE);
+        }
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initialization();
         listenerAdding();
-        loadPreferences();
+        //loadPreferences();
         setDefaultText();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
-
 
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -105,7 +106,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //获取导航视图并设置菜单监听，对应上面实现的接口
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
     }
     @Override
@@ -133,6 +133,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                     break;
                 default:
+                    startActivity(intent);
                     break;
             }
 //             Handle the camera action
@@ -151,19 +152,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
-
-
-
-
-
-
     private void loadPreferences() {
         prefs = getPreferences(MODE_PRIVATE);
         TOTAL_BLOCKED_AD = prefs.getInt("blockedAD", 0);
         TOTAL_SEARCH_TIME = prefs.getInt("searchTime", 0);
-        LANGUAGE_SELECTION = prefs.getInt("language", 0);
+        LANGUAGE_SELECTION = prefs.getInt("language", 1);
         System.out.println(LANGUAGE_SELECTION);
     }
 
@@ -207,16 +200,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //TODO: do selection engines function here
                 EditText editText = (EditText) findViewById(R.id.key_word_TextView);
                 Intent intent = new Intent(new Intent(HomeActivity.this, SearchActivity.class));
-                String input = editText.getText().toString();
+                //String input = editText.getText().toString();
+                Editable editableinput =editText.getText();
+                String input="";
+                if(editableinput!=null) input=editableinput.toString();
                 if (!input.equals("")) {
                     Bundle bundle = new Bundle();
                     bundle.putString("keyword", input);
                     bundle.putInt("engine", engine);
                     bundle.putInt("page", 1);
                     intent.putExtra("Message", bundle);
+                    startActivity(intent);
                 }
-
-                startActivity(intent);
             }
         });
 

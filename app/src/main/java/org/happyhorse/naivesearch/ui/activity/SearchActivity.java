@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -260,14 +261,15 @@ public class SearchActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                keyword = input.getText().toString();
-                setContent(webView, engine, keyword, 1);
+                Editable editableinput = input.getText();
+                if(editableinput!=null) {
+                    keyword=editableinput.toString();
+                    if(!keyword.equals(""))setContent(webView, engine, keyword, 1);
+                }
                 input.clearFocus();
                 hideInput();
             }
         });
-
-
     }
 
     protected void hideInput() {
