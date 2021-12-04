@@ -9,7 +9,9 @@ import android.os.Message;
 import android.text.Editable;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceRequest;
@@ -19,6 +21,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -257,6 +260,22 @@ public class SearchActivity extends AppCompatActivity {
 
         //输入框内容获取以及搜索键
         EditText input = (EditText) findViewById(R.id.key_word_TextView);
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                    Editable editableinput = input.getText();
+                    if(editableinput!=null) {
+                        keyword=editableinput.toString();
+                        if(!keyword.equals(""))setContent(webView, engine, keyword, 1);
+                    }
+                    input.clearFocus();
+                    hideInput();
+                    return true;
+                }
+                return false;
+            }
+        });
         ImageButton search = (ImageButton) findViewById(R.id.search_imageButton);
         search.setOnClickListener(new View.OnClickListener() {
             @Override

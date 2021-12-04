@@ -2,19 +2,24 @@ package org.happyhorse.naivesearch.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +41,16 @@ import org.happyhorse.naivesearch.R;
 import org.happyhorse.naivesearch.databinding.LayoutHomeContainerBinding;
 
 import java.util.Locale;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private AppBarConfiguration mAppBarConfiguration;
@@ -49,6 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private int TOTAL_BLOCKED_AD = 0;
     private int TOTAL_SEARCH_TIME = 0;
     private int LANGUAGE_SELECTION = 0;
+    private int THEME_SELECTION = 0;
     TextView text;
     //search parameters
     private String QUERY;
@@ -142,7 +158,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_reset){
 
         }  else if (id == R.id.nav_share){
-
+            ClipboardManager clipboardManager=(ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData=ClipData.newPlainText("simple text","https://github.com/NaiveSearch/NaiveSearch/tree/dev/app/src/main");
+            System.out.println("Pasted to clipboard");
+            clipboardManager.setPrimaryClip(clipData);
         } else if (id == R.id.nav_send) {
 
         }
@@ -200,7 +219,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //TODO: do selection engines function here
                 EditText editText = (EditText) findViewById(R.id.key_word_TextView);
                 Intent intent = new Intent(new Intent(HomeActivity.this, SearchActivity.class));
-                //String input = editText.getText().toString();
+                editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                            System.out.println("Search key pressed");
+                            Editable editableinput =editText.getText();
+                            String input="";
+                            if(editableinput!=null) input=editableinput.toString();
+                            if (!input.equals("")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("keyword", input);
+                                bundle.putInt("engine", engine);
+                                bundle.putInt("page", 1);
+                                intent.putExtra("Message", bundle);
+                                startActivity(intent);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
                 Editable editableinput =editText.getText();
                 String input="";
                 if(editableinput!=null) input=editableinput.toString();
@@ -214,6 +253,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+
+
 
         ENGINE_BAIDU_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override

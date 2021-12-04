@@ -28,6 +28,7 @@
         <EditText
             android:id="@+id/key_word_TextView"
             android:layout_width="wrap_content"
+            android:imeOptions="actionSearch"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@null"
