@@ -190,6 +190,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
         } else if (id == R.id.nav_reset){
+            prefs = getSharedPreferences("statistic", MODE_PRIVATE);
+            SharedPreferences.Editor editor=prefs.edit();
+            editor.putInt("blockedAD",0);
+            editor.putInt("searchTime",0);
+            editor.apply();
+            Intent intent = new Intent(new Intent(HomeActivity.this, HomeActivity.class));
+            startActivity(intent);
 
         }  else if (id == R.id.nav_share){
             ClipboardManager clipboardManager=(ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -206,7 +213,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void loadPreferences() {
-        prefs = getPreferences(MODE_PRIVATE);
+        prefs = getSharedPreferences("statistic",MODE_PRIVATE);
         TOTAL_BLOCKED_AD = prefs.getInt("blockedAD", 0);
         TOTAL_SEARCH_TIME = prefs.getInt("searchTime", 0);
         LANGUAGE_SELECTION = prefs.getInt("language", 1);

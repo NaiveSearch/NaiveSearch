@@ -1,10 +1,13 @@
+var ads = 0;
 Element.prototype.remove = function () {
     this.parentElement.removeChild(this);
+    ads++;
 }
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
     for (var i = this.length - 1; i >= 0; i--) {
         if (this[i] && this[i].parentElement) {
             this[i].parentElement.removeChild(this[i]);
+            ads++;
         }
     }
 }
@@ -27,7 +30,12 @@ for (let i = 0; i < elementClasses.length; i++) {
 
 (function () {
     $('#content_left>div').not('.c-container').css({
-        height: 0,
-        overflow: 'hidden'
-    })
+            height: 0,
+            overflow: 'hidden',
+        },
+        ads++
+    )
+})();
+(function (){
+   window.location.href="naivesearch://statistics?ads="+ ads;
 })();

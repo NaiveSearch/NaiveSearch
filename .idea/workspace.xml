@@ -9,21 +9,22 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81aae889-1f0f-47a2-9bd8-91fc9c8fc152" name="Default Changelist" comment="NIGHTMODE+ENGINEUI+BUG FIX">
+    <list default="true" id="81aae889-1f0f-47a2-9bd8-91fc9c8fc152" name="Default Changelist" comment="实现信息统计功能">
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/js/baidu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/js/baidu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/js/bing.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/js/bing.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/happyhorse/naivesearch/ui/activity/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/happyhorse/naivesearch/ui/activity/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/happyhorse/naivesearch/ui/activity/SearchActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/happyhorse/naivesearch/ui/activity/SearchActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5876ca15]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[620b7de1]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -98,6 +99,8 @@
       <recent name="C:\Users\92134\AndroidStudioProjects\NaiveSearch4\app\src\main\res" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ExCit\StudioProjects\NaiveSearch\app\src\main\assets\js" />
+      <recent name="C:\Users\ExCit\StudioProjects\NaiveSearch\app\src\main\java\org\happyhorse\naivesearch\ui\activity" />
       <recent name="C:\Users\92134\AndroidStudioProjects\NaiveSearch4\app\src\main\res\mipmap-night" />
       <recent name="C:\Users\ExCit\StudioProjects\NaiveSearch\app\src\main\java\org\happyhorse\naivesearch\utils" />
     </key>

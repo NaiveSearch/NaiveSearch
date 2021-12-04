@@ -1,12 +1,15 @@
 package org.happyhorse.naivesearch.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -36,6 +39,7 @@ import org.happyhorse.naivesearch.utils.SpyderUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.Set;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -84,11 +88,17 @@ public class SearchActivity extends AppCompatActivity {
 
                     public boolean shouldOverrideUrlLoading(WebView view, String url)
                     {
-                        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
-                        Bundle http_link_bundle = new Bundle();
-                        http_link_bundle.putString("link",url);
-                        intent.putExtras(http_link_bundle);
-                        startActivity(intent);
+                        if (url.startsWith("naivesearch")) {
+                            getParas(url);
+                        }
+                        //跳到结果页
+                        else {
+                            Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
+                            Bundle http_link_bundle = new Bundle();
+                            http_link_bundle.putString("link", url);
+                            intent.putExtras(http_link_bundle);
+                            startActivity(intent);
+                        }
                         return true;
                     }
 
@@ -112,7 +122,32 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         }).start();
-
+    }
+    private void getParas(String url){
+        Uri uriRequest = Uri.parse(url);
+        String scheme = uriRequest.getScheme();
+        String action = uriRequest.getHost();
+        String query = uriRequest.getQuery();
+        if (url.startsWith("naivesearch")) {
+            if ("naivesearch".equals(scheme)) {
+                if (!TextUtils.isEmpty(query)) {
+                    //HashMap maps = new HashMap();
+                    Set<String> names = uriRequest.getQueryParameterNames();
+                    for (String name : names) {
+                        //maps.put(name, uriRequest.getQueryParameter(name));
+                        //System.out.println(name + " " + uriRequest.getQueryParameter(name));
+                        updatePreferences(Integer.parseInt(uriRequest.getQueryParameter(name)));
+                    }
+                }
+            }
+        }
+    }
+    private void updatePreferences(int ads){
+        SharedPreferences prefs = getSharedPreferences("statistic", MODE_PRIVATE);
+        SharedPreferences.Editor prefs_editor = prefs.edit();
+        prefs_editor.putInt("blockedAD",prefs.getInt("blockedAD",0)+ads);
+        prefs_editor.putInt("searchTime",prefs.getInt("searchTime",0)+1);
+        prefs_editor.apply();
     }
     private void injectJS(WebView webView, int engine) {
         try {
