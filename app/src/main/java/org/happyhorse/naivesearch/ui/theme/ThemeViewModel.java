@@ -1,9 +1,9 @@
-package org.happyhorse.naivesear4ch.ui.theme;
+package org.happyhorse.naivesearch.ui.theme;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
+//TODO:not used
 public class ThemeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+//TODO:not used
 public class LanViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

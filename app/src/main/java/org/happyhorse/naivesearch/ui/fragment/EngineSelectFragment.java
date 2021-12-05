@@ -18,9 +18,9 @@ import org.happyhorse.naivesearch.R;
  * create an instance of this fragment.
  */
 public class EngineSelectFragment extends Fragment {
-    private ImageButton ENGINE_BAIDU_BUTTON;
-    private ImageButton ENGINE_BING_BUTTON;
-    private ImageButton ENGINE_SELECTION_BUTTON;
+    private ImageButton ENGINE_BAIDU_BUTTON;    //TODO:not used
+    private ImageButton ENGINE_BING_BUTTON;//TODO:not used
+    private ImageButton ENGINE_SELECTION_BUTTON;//TODO:not used
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -29,8 +29,8 @@ public class EngineSelectFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mParam1; //parameter 1
+    private String mParam2; //parameter 2
 
     public EngineSelectFragment() {
         // Required empty public constructor
@@ -58,16 +58,17 @@ public class EngineSelectFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getString(ARG_PARAM1); //set parameter 1
+            mParam2 = getArguments().getString(ARG_PARAM2); //set parameter 2
         }
-
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //TODO:not used
+
         // below codes already move to MainActivity2.class
 //        ENGINE_BAIDU_BUTTON = getActivity().findViewById(R.id.imageButton_baidu);
 //        ENGINE_BING_BUTTON = getActivity().findViewById(R.id.imageButton_bing);
@@ -96,8 +97,13 @@ public class EngineSelectFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_engine_select, container, false);
     }
 
+    /**
+     * set it invisible when fragment is clicked
+     *
+     * @param v event view
+     */
     public void onClick(View v) {
-        v.setVisibility(View.INVISIBLE);
+        v.setVisibility(View.INVISIBLE);    //set invisible
         Log.d("TAG", "onClick: vis");
     }
 
