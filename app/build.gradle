@@ -53,6 +53,7 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:23.2.0'
     implementation 'androidx.navigation:navigation-runtime:2.3.5'
+    implementation files('libs\\jsoup-1.14.3.jar')
 
     testImplementation 'junit:junit:4.+'
     testImplementation 'org.testng:testng:6.9.6'
