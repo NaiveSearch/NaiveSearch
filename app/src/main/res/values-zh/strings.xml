@@ -16,7 +16,7 @@
     <string name="nav_header_desc">导航首部</string>
     <string name="action_settings">设置</string>
 
-    <string name="menu_language">切换语言</string>
+    <string name="menu_language">切换英文</string>
     <string name="menu_theme">切换主题</string>
     <string name="menu_reset">重置应用</string>
     <string name="title_activity_main3">MainActivity3</string>

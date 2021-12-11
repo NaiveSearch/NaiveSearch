@@ -5,24 +5,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_language"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ch"
             android:title="@string/menu_language" />
         <item
             android:id="@+id/nav_reset"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/reset"
             android:title="@string/menu_reset" />
         <item
             android:id="@+id/nav_theme"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/night"
             android:title="@string/menu_theme" />
     </group>
 
     <item android:title="@string/communicate">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@drawable/slide"
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/share"
                 android:title="@string/share" />
-            <item android:id="@+id/nav_send" android:icon="@drawable/slide"
-                android:title="@string/send" />
         </menu>
     </item>
 

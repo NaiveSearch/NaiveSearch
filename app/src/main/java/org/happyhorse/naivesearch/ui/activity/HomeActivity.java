@@ -214,8 +214,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             ClipData clipData = ClipData.newPlainText("simple text", "https://github.com/NaiveSearch/NaiveSearch/tree/dev/app/src/main");
             System.out.println("Pasted to clipboard");
             clipboardManager.setPrimaryClip(clipData);
-        } else if (id == R.id.nav_send) {   //send function
-
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
