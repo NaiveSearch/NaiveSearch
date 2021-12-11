@@ -1,10 +1,15 @@
 package org.happyhorse.naivesearch.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -22,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -80,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public static final String NIGHT_MODE = "NightMode";    //theme name of night mode
     public static final String PREF = "AppSettingsPrefs";   //identifier of settings preferences
     private static final String TAG = "MainActivity";   //TODO:not used
+    final String[] CHANNEL_IDS = {"CH1", "CH2", "CH3"};
 
     /**
      * Override onCreate() method
@@ -90,6 +97,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        createNotificationChannel();
 
         //load preferences and set language to display
         loadPreferences();
@@ -192,12 +201,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 editor.putBoolean(NIGHT_MODE, false);
                 editor.apply();
                 recreate();
+                sendNotification("Day Time", "Theme enabled!", 0, 1);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, true);
                 editor.apply();
                 recreate();
+                sendNotification("Night Time", "Theme enabled!", 1, 2);
             }
 
         } else if (id == R.id.nav_reset) {   //reset the statistic information to be 0
@@ -218,6 +229,43 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void sendNotification(String title, String text, int channel, int id) {
+        Notification.Builder builder =
+                new Notification.Builder(HomeActivity.this, CHANNEL_IDS[channel]);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle(title);
+        builder.setContentText(text);
+        Notification notification = builder.build();
+        NotificationManager manager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(id, notification);
+    }
+
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(CHANNEL_IDS[0],
+                    "Channel1(channel name)",
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel1.setDescription("description 1");
+
+            NotificationChannel channel2 = new NotificationChannel(CHANNEL_IDS[1],
+                    "Channel2(channel name)",
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel2.setDescription("description 2");
+
+            NotificationChannel channel3 = new NotificationChannel(CHANNEL_IDS[2],
+                    "Channel3(channel name)",
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel3.setDescription("description 3");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel1);
+            notificationManager.createNotificationChannel(channel2);
+            notificationManager.createNotificationChannel(channel3);
+        }
     }
 
     /**
