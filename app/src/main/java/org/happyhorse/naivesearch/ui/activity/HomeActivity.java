@@ -104,15 +104,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
         boolean isFirstStart = appSettingsPrefs.getBoolean(FIRST_START, true);
 
-//        SharedPreferences.Editor neweditor = appSettingsPrefs.edit();
-//        if(isFirstStart){
-//        if (hour>6) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//            neweditor.putBoolean(FIRST_START, false);
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//            neweditor.putBoolean(FIRST_START, false);
-//        }}
+
 
 
         super.onCreate(savedInstanceState);
@@ -135,6 +127,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+
+//        if(isFirstStart){
+//            SharedPreferences.Editor editor = appSettingsPrefs.edit();
+//        if (hour>6) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//            editor.putBoolean(FIRST_START, false);
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//            editor.putBoolean(FIRST_START, false);
+//        }}
         //set the layout which will be shown
         binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -184,7 +186,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_language) {   //change language function
-            finish();
+
             SharedPreferences.Editor editor = prefs.edit();
             Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
             switch (LANGUAGE_SELECTION) {
@@ -217,15 +219,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, false);
                 editor.apply();
-                startActivity(intent);
+                recreate();
                 sendNotification("Day Time", "Theme enabled!", 0, 1);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, true);
                 editor.apply();
-
-                startActivity(intent);
+                recreate();
                 sendNotification("Night Time", "Theme enabled!", 1, 2);
             }
 

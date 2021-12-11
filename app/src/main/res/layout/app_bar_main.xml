@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="200dp"
         android:background="@color/toolbar"
         app:contentScrim="@color/toolbar"
         android:backgroundTint="@color/toolbar"
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/slide"
+                android:src="@drawable/wing"
                 app:layout_collapseMode="parallax" />
 
 
