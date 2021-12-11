@@ -5,4 +5,5 @@
     <color name="mainBackground">#646464</color>
     <color name="buttonPrimary">#9F9E9E</color>
     <color name="back">#FF000000</color>
+    <color name="toolbar">#FF018786</color>
 </resources>

@@ -16,6 +16,7 @@
 
 
     <color name="mainBackground">@color/white</color>
+    <color name="toolbar">@color/pink_500</color>
 
 
 

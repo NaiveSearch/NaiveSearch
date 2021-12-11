@@ -41,6 +41,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.happyhorse.naivesearch.R;
 import org.happyhorse.naivesearch.databinding.LayoutHomeContainerBinding;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 /**
@@ -56,6 +57,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     //preferences
     private SharedPreferences prefs;    //use to load preferences
+    private SharedPreferences appSettingsPrefs;    //use to load preferences
     private int TOTAL_BLOCKED_AD = 0;   //a total of blocked advertisements
     private int TOTAL_SEARCH_TIME = 0;  //a total of search times
     private int LANGUAGE_SELECTION = 0; //the identifier of selected language
@@ -96,6 +98,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Calendar ca = Calendar.getInstance();
+        int hour=ca.get(Calendar.HOUR);
+        appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF, 0);
+        final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
+        boolean isFirstStart = appSettingsPrefs.getBoolean(FIRST_START, true);
+
+//        SharedPreferences.Editor neweditor = appSettingsPrefs.edit();
+//        if(isFirstStart){
+//        if (hour>6) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//            neweditor.putBoolean(FIRST_START, false);
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//            neweditor.putBoolean(FIRST_START, false);
+//        }}
+
+
         super.onCreate(savedInstanceState);
 
         createNotificationChannel();
@@ -107,15 +126,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (LANGUAGE_SELECTION == 1) {
             setLANGUAGE_SELECTION(Locale.CHINESE);
         }
-
-        //set the layout which will be shown
-        binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        //load the them selection information from shared preferences, and set the theme for last use
-        final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF, 0);
-        final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
-        boolean isFirstStart = appSettingsPrefs.getBoolean(FIRST_START, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && isFirstStart) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         } else {
@@ -125,6 +135,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+        //set the layout which will be shown
+        binding = LayoutHomeContainerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+
         initialization();   //initialize variables
         listenerAdding();   //add event listener for components
         //loadPreferences();
@@ -192,22 +208,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 //             Handle the camera action
         } else if (id == R.id.nav_theme) { //change theme function
-            final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF, 0);
+            //final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF, 0);
             SharedPreferences.Editor editor = appSettingsPrefs.edit();
+            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
             final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
             if (isNightModeOn) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, false);
                 editor.apply();
-                recreate();
+                startActivity(intent);
                 sendNotification("Day Time", "Theme enabled!", 0, 1);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, true);
                 editor.apply();
-                recreate();
+
+                startActivity(intent);
                 sendNotification("Night Time", "Theme enabled!", 1, 2);
             }
 
