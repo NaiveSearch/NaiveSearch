@@ -1,5 +1,6 @@
 package org.happyhorse.naivesearch.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -20,6 +21,7 @@ public class ResultActivity extends AppCompatActivity {
     private WebView webView;    //a web view used to show website
     private long exitTime = 0;  //TODO:not used
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //call super method

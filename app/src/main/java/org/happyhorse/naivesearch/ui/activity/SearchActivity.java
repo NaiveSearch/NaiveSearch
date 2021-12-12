@@ -1,10 +1,9 @@
 package org.happyhorse.naivesearch.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,8 +15,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -28,7 +25,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.happyhorse.naivesearch.R;
 import org.happyhorse.naivesearch.config.Config;
@@ -47,15 +43,9 @@ import java.util.Set;
  */
 public class SearchActivity extends AppCompatActivity {
 
-    private ActivitySearchBinding binding;
-
     private String keyword; //the key word will be search
-
     private int engine; //the search engine will be use
-
     private int page;   //the page number of search results
-
-    private String content; //TODO:not used
 
     //key word setting API
     public void setKeyword(String keyword) {
@@ -81,9 +71,9 @@ public class SearchActivity extends AppCompatActivity {
      * @param page    number of result page
      * @see SpyderUtil#getSearchResult(int, java.lang.String, int)
      */
-    public void setContent(WebView webView, int engine, String keyword, int page) {
+    public void setContent(WebView webView, int engine, String keyword, int page) throws InterruptedException {
         //a Handler to deal with search results
-        Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak") Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 Bundle bundle = msg.getData();
@@ -100,7 +90,7 @@ public class SearchActivity extends AppCompatActivity {
                      * @param view  the WebView target need to processed
                      * @param url   used to call super method
                      * @see SearchActivity#injectJS(android.webkit.WebView, int)
-                     * @see org.happyhorse.naivesearch.ui.activity.SearchActivity#injectCSS(android.webkit.WebView, int)
+                     * @see SearchActivity#injectCSS(android.webkit.WebView, int)
                      *
                      */
                     @Override
@@ -112,6 +102,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
 
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        //pass the number of ads to preference
                         if (url.startsWith("naivesearch")) {
                             getParas(url);
                         }
@@ -131,7 +122,7 @@ public class SearchActivity extends AppCompatActivity {
         };
 
         //start searching query and send result message
-        new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -146,8 +137,8 @@ public class SearchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
-        }).start();
+        });
+        t.start();
     }
 
     /**
@@ -168,7 +159,6 @@ public class SearchActivity extends AppCompatActivity {
                     Set<String> names = uriRequest.getQueryParameterNames();
                     for (String name : names) {
                         //maps.put(name, uriRequest.getQueryParameter(name));
-                        //System.out.println(name + " " + uriRequest.getQueryParameter(name));
                         updatePreferences(Integer.parseInt(uriRequest.getQueryParameter(name)));
                     }
                 }
@@ -256,6 +246,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -267,26 +258,10 @@ public class SearchActivity extends AppCompatActivity {
         setPage(bundle.getInt("page")); //set the page of result to show
 
         //UI setting
-        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        org.happyhorse.naivesearch.databinding.ActivitySearchBinding binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        BottomNavigationView navView = findViewById(R.id.nav_view); //find navigation on the bottom
-
-
-        //TODO:not used
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_previous, R.id.navigation_home, R.id.navigation_next)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_result);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(binding.navView, navController);
-
-
         WebView webView = (WebView) findViewById(R.id.webView);
+
         //allow JavaScript execution with H5 compatibility
         //configure web settings
         WebSettings webSettings = webView.getSettings();
@@ -294,6 +269,7 @@ public class SearchActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
 
+        //enable search page zoom button
         webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
         webSettings.setLoadWithOverviewMode(true);
@@ -301,44 +277,27 @@ public class SearchActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         //Allow errors to enforce web pages
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        } else {
-            webSettings.setMixedContentMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setMixedContentMode(WebSettings.LOAD_DEFAULT);
+        //Allow JavaScript error
+        try {
+            Method method = Class.forName("android.webkit.WebView").
+                    getMethod("setWebContentsDebuggingEnabled", Boolean.TYPE);
+            if (method != null) {
+                method.setAccessible(true);
+                method.invoke(null, true);
+            }
+        } catch (Exception ignored) {
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //Allow JavaScript error
-            try {
-                Method method = Class.forName("android.webkit.WebView").
-                        getMethod("setWebContentsDebuggingEnabled", Boolean.TYPE);
-                if (method != null) {
-                    method.setAccessible(true);
-                    method.invoke(null, true);
-                }
-            } catch (Exception e) {
-            }
-        }
-        webView.setWebViewClient(new WebViewClient() {
-            //Allow WebView loading page
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(String.valueOf(request.getUrl()));
-                return true;
-            }
-
-            //Fix certificate errors
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();
-            }
-        });
-
 
         /*
          * when first loading, it needs to get key word and search engine such parameters from HomeActivity
          * use initialized value here
          */
-        setContent(webView, engine, keyword, page);
+        try {
+            setContent(webView, engine, keyword, page);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         //assign buttons of pre-page, next-page and home
@@ -352,14 +311,22 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (page == 0) return;
                 setPage(page - 1);
-                setContent(webView, engine, keyword, page);
+                try {
+                    setContent(webView, engine, keyword, page);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         next.setOnClickListener(new View.OnClickListener() {    //next page
             @Override
             public void onClick(View v) {
                 setPage(page + 1);
-                setContent(webView, engine, keyword, page);
+                try {
+                    setContent(webView, engine, keyword, page);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         home.setOnClickListener(new View.OnClickListener() {    //back to HomeActivity
@@ -382,7 +349,13 @@ public class SearchActivity extends AppCompatActivity {
                         keyword = editableinput.toString();
 
                         //start search the input key word
-                        if (!keyword.equals("")) setContent(webView, engine, keyword, 1);
+                        if (!keyword.equals("")) {
+                            try {
+                                setContent(webView, engine, keyword, 1);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                     input.clearFocus(); //remove focus from input box
                     hideInput();    //hide the keyboard
@@ -402,7 +375,13 @@ public class SearchActivity extends AppCompatActivity {
                     keyword = editableinput.toString();
 
                     //start search the input key word
-                    if (!keyword.equals("")) setContent(webView, engine, keyword, 1);
+                    if (!keyword.equals("")) {
+                        try {
+                            setContent(webView, engine, keyword, 1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 input.clearFocus(); //remove focus from input box
                 hideInput();    //hide soft keyboard
