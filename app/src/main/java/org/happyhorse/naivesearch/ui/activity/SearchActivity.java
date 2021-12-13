@@ -270,11 +270,11 @@ public class SearchActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
 
         //enable search page zoom button
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setSupportZoom(true);
-        webSettings.setLoadWithOverviewMode(true);
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        webSettings.setBuiltInZoomControls(true);
+//        webSettings.setSupportZoom(true);
+//        webSettings.setLoadWithOverviewMode(true);
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         //Allow errors to enforce web pages
         webSettings.setMixedContentMode(WebSettings.LOAD_DEFAULT);

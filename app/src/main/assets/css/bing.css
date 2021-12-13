@@ -1,9 +1,18 @@
-body{
-    min-width: 200px;
-    overflow: auto;
+html{
+    /*min-width: 450px;*/
+    width:550px;
 }
-.sam_newgrid{
-    width: 400px !important;
-    margin-left: 20px !important;
-    padding-left: 100px !important;
+.b_respl{
+    min-width: 550px;
+    overflow: auto;
+    /*width:450px;*/
+}
+#b_content{
+    padding: 0;
+    width:100%;
+}
+
+#b_results{
+    width:100%;
+    height:100%;
 }
