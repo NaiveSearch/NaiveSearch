@@ -3,6 +3,8 @@ package org.happyhorse.naivesearch.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -26,10 +28,9 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //call super method
         setContentView(R.layout.activity_result);   //set the layout which will be shown
-
         //set default night mode to a night mode which uses always uses a dark mode
         //enabling night qualified resources regardless of the time.
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
 
         //load the parameters
@@ -37,8 +38,6 @@ public class ResultActivity extends AppCompatActivity {
         Bundle http_link_bundle = intent.getExtras();
         //get the link which user want to go with
         String url = http_link_bundle.getString("link");
-
-
         //webView = new WebView(this);
 
         //configure web view
@@ -63,5 +62,19 @@ public class ResultActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //allow JavaScript execution with H5 compatibility
+        //configure web settings
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+
+        //enable search page zoom button
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setLoadWithOverviewMode(true);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
 }

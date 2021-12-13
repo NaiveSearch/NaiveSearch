@@ -221,8 +221,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_share) {  //share the application with friends
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clipData = ClipData.newPlainText("simple text", "https://github.com/NaiveSearch/NaiveSearch/tree/dev/app/src/main");
-            System.out.println("Pasted to clipboard");
+            ClipData clipData = ClipData.newPlainText("simple text", "https://github.com/NaiveSearch/NaiveSearch/tree/master/app/src/main");
+            sendNotification("Sharing to friends", "App link has been pasted to clipboard", 2, 3);
             clipboardManager.setPrimaryClip(clipData);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -376,7 +376,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 //set the current selected engine image to be Baidu image
                 engine_selection_button.setImageResource(R.mipmap.ic_baidu_engine_foreground);
-                engine = 0; //identifier of Baidu engine
+                engine = Config.BAIDU_SEARCH;
                 View fragment = findViewById(R.id.fragment_engines);
                 fragment.setVisibility(View.INVISIBLE);
                 Log.d("TAG", "onClick: set invisible");
@@ -389,7 +389,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 //set the current selected engine image to be Bing image
                 engine_selection_button.setImageResource(R.mipmap.ic_bing_engine);
-                engine = 1; //identifier of Bing engine
+                engine = Config.BING_SEARCH;
                 View fragment = findViewById(R.id.fragment_engines);
                 fragment.setVisibility(View.INVISIBLE);
                 Log.d("TAG", "onClick: set invisible");
