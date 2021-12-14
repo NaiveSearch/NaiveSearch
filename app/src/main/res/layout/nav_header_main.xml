@@ -11,21 +11,21 @@
         android:scaleType="centerCrop"
          />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="Happy"
-        android:textColor="@android:color/secondary_text_light"
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Happy"-->
+<!--        android:textColor="@android:color/secondary_text_light"-->
+<!--        android:textSize="18sp" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Horse" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Horse" />-->
 
 </LinearLayout>
 
