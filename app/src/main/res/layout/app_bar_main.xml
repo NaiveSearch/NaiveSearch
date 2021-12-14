@@ -34,7 +34,7 @@
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_group_expand_15"
 
-                app:title="Happy Horse"
+                app:title="Simple Search"
                 app:titleTextColor="@color/white">
 
 
@@ -42,18 +42,22 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />
+            android:layout_height="wrap_content" />
 
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/layout_home_mainpage" />
+    <include
+        layout="@layout/layout_home_mainpage"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
