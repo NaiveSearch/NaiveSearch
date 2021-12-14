@@ -27,4 +27,7 @@
 <string name="send">Send</string>
 <string name="TOTAL_BLOCKED_AD">Total blocked ad :</string>
 <string name="TOTAL_SEARCH_TIME_STRING">Total search time :</string>
+<string name="Day_Time">Day time</string>
+    <string name="Theme_enabled">Theme enabled</string>
+    <string name="Night_Time">Night time</string>
 </resources>

@@ -192,22 +192,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_theme) { //change theme function
             //final SharedPreferences appSettingsPrefs = HomeActivity.this.getSharedPreferences(PREF, 0);
             SharedPreferences.Editor editor = appSettingsPrefs.edit();
-            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+            //Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
             final boolean isNightModeOn = appSettingsPrefs.getBoolean(NIGHT_MODE, true);
             if (isNightModeOn) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, false);
                 editor.apply();
-                startActivity(intent);
-                sendNotification("Day Time", "Theme enabled!", 0, 1);
+                recreate();
+                sendNotification(getString(R.string.Day_Time), getString(R.string.Theme_enabled), 0, 1);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor.putBoolean(FIRST_START, false);
                 editor.putBoolean(NIGHT_MODE, true);
                 editor.apply();
-                startActivity(intent);
-                sendNotification("Night Time", "Theme enabled!", 1, 2);
+                recreate();
+                sendNotification(getString(R.string.Night_Time), getString(R.string.Theme_enabled), 1, 2);
             }
 
         } else if (id == R.id.nav_reset) {   //reset the statistic information to be 0

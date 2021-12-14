@@ -27,4 +27,7 @@
     <string name="send">发送到</string>
     <string name="TOTAL_BLOCKED_AD">总共拦截的广告数 :</string>
     <string name="TOTAL_SEARCH_TIME_STRING">已搜索次数 :</string>
+    <string name="Day_Time">白天</string>
+    <string name="Theme_enabled">主题已经启动</string>
+    <string name="Night_Time">夜间</string>
 </resources>

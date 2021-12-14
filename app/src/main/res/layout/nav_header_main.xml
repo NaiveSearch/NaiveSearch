@@ -9,7 +9,7 @@
         android:layout_height="270dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerCrop"
-        android:src="@drawable/ma" />
+         />
 
     <TextView
         android:layout_width="wrap_content"
