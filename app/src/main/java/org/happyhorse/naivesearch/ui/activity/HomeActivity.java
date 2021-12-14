@@ -421,8 +421,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         total_blocked_ad_textview = findViewById(R.id.total_blocked_ad_textview);
         total_searched_textview = findViewById(R.id.total_searched_textview);
 
-        logo_image_button.setImageResource(R.raw.logo);
-
 
         //set the size of buttons of fragment same as select button
         int height = engine_selection_button.getLayoutParams().height;
