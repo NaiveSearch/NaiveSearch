@@ -12,5 +12,5 @@ public class Config {
     public static final int ENGLISH = 0;
     public static final int CHINESE = 1;
     public static final Locale[] LOCALES = {Locale.ENGLISH,Locale.CHINESE};
-
+    public static final String DOWNLOAD_LINK = "https://github.com/NaiveSearch/NaiveSearch/releases/download/release/Simple-Search.apk";
 }

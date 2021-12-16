@@ -221,7 +221,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_share) {  //share the application with friends
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clipData = ClipData.newPlainText("simple text", "https://github.com/NaiveSearch/NaiveSearch/tree/master/app/src/main");
+            ClipData clipData = ClipData.newPlainText("simple text", Config.DOWNLOAD_LINK);
             sendNotification("Sharing to friends", "App link has been pasted to clipboard", 2, 3);
             clipboardManager.setPrimaryClip(clipData);
         }
